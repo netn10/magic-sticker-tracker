@@ -1,0 +1,23 @@
+body{
+    background-color: rgba(97, 15, 72, 0.734);
+}
+
+.homepage_image{
+    cursor: pointer;
+    width: 100px;
+    height: 120px;
+}
+
+.selected {
+    border: 2px solid yellow;
+}
+
+#error_if_more_than_ten {
+    color: red;
+    font-weight: bold;
+}
+
+#step_2 {
+    color: green;
+    text-decoration: none;
+}

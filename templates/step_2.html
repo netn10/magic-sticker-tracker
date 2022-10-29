@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script type="text/javascript" src="../static/libs/jquery.js"></script>
+    <script type="text/javascript" src="../static/libs/jquery.maphilight.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Sticker Tracker</title>
+    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='style/all_pages.css') }}" />
+    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='style/step_2.css') }}" />
+</head>
+<body>
+    <center>
+        <h1>Step Two</h1>
+        <h2>Your three randomly selected sticker sheets are:</h2>
+    </center>
+    <div class="row">
+    {% for sticker_image, sticker_data in sticker_images_and_data.items() %}
+    <div class="column">
+    <img usemap="#{{sticker_image}}" id="{{sticker_image}}" class="step_2_image" src="../static/all_stickers_images/{{sticker_image}}">
+    {{sticker_data|safe}}
+    </div>
+    {% endfor %}
+    </div>
+
+    <br>
+    <center>
+        <button id="plus_ticket">+</button>
+        <div id="container">
+            <img id="Ticket_Bucket_Bot" src="../static/misc/Ticket Bucket-Bot.png"></img>
+            <p id="number_of_tickets_label">0</p>
+        </div>
+        <button id="minus_ticket">-</button>
+        <br>
+        <button onclick="window.location.href='/'">Go Back</button>
+    </center>
+</body>
+<script>
+    tickets = 0
+    all_stickers = document.getElementsByTagName("area")
+
+    $('img').maphilight({
+        fillColor: '008800'
+   });
+
+
+   function update_all_stickers(){
+        for (sticker of all_stickers){
+            if (sticker.title.replace("Price: ", "") <= tickets)
+            {
+                // Color it green
+                $(sticker).data('maphilight', {"stroke":0, "alwaysOn": true, "fillColor":"008800", "fillOpacity":0.3}).trigger('alwaysOn.maphilight')
+            }
+            else
+            {
+                // Color it red
+                $(sticker).data('maphilight', {"stroke":0, "alwaysOn": true, "fillColor":"FF0000", "fillOpacity":0.3}).trigger('alwaysOn.maphilight')
+            }
+    }
+   }
+   update_all_stickers()
+
+    $("#plus_ticket").on("click", function(e){
+        e.preventDefault()
+        tickets+=1
+        $("#number_of_tickets_label").text(tickets)
+        update_all_stickers()
+    })
+    $("#minus_ticket").on("click", function(e){
+        e.preventDefault()
+        if (tickets > 0)
+        tickets-=1
+        $("#number_of_tickets_label").text(tickets)
+        update_all_stickers()
+    })
+
+    $(all_stickers).on("click", function(e) {
+        e.preventDefault()
+        sticer = e.target
+        if ($(sticer).hasClass("clicked") === false)
+        {
+            $(sticer).addClass("clicked")
+            price = sticer.title.replace("Price: ", "")
+            if (price <= tickets){
+                tickets -= price
+                $("#number_of_tickets_label").text(tickets)
+                update_all_stickers()
+                $(sticer).append(
+                    $('<div></div>').css({
+                       position:'absolute',
+                       left: e.pageX,
+                       top: e.pageY
+                    }).append('<textarea type="text" rows="2" cols="10" />Sticked on: ').focus().append('<button class=delete_closest_textbox>X</button>'));
+            }
+        }
+
+    })
+
+    $(document.body).on('click', '.delete_closest_textbox' ,function(){
+        $(this).closest('area').removeClass("clicked");
+        $(this).parent().remove();
+    })
+</script>

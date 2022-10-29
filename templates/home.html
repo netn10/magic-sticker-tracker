@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sticker Tracker</title>
+    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='style/all_pages.css') }}" />
+    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='style/homepage.css') }}" />
+</head>
+<body>
+    <center>
+        <h1>Welcome to the Sticker Tracker!</h1>
+        <h2>To start, please select 10 sticker sheets.</h2>
+        <p>Selected: <span id="counter">0</span> out of 10 <span id="error_if_more_than_ten"></span>    <a onclick="test()" id="step_2" style="display: none" href="#">Step 2</a></p>    
+    </center>
+    {% for sticker_image in all_stickers_images %}
+    <img id="{{sticker_image}}" class="homepage_image" src="../static/all_stickers_images/{{sticker_image}}", onclick="select_sticker('{{sticker_image}}')">
+    {% endfor %}
+    <p>Wizards of the Coast, Magic: The Gathering, and their logos are trademarks of Wizards of the Coast LLC. © 1995-2021 Wizards. All rights reserved. Nothing on this site is affiliated with Wizards of the Coast LLC.</p>
+</body>
+<script>
+
+    selected_stickers_array = []
+    function select_sticker(sticker_image){
+        selected_sticker = document.getElementById(sticker_image)
+        counter = document.getElementById("counter")
+        counter_value = parseInt(counter.innerText)
+        error_if_more_than_ten = document.getElementById("error_if_more_than_ten")
+        step_2 = document.getElementById("step_2")
+        if (selected_sticker.classList.contains("selected")) {
+            selected_stickers_array = selected_stickers_array.filter(e => e !== sticker_image)
+            error_if_more_than_ten.innerText = ""
+            selected_sticker.classList.remove('selected')
+            counter_value = counter_value-=1
+            counter.innerText = counter_value
+            step_2.style.display = "none"
+            return 1
+        }
+        if (selected_sticker.classList.contains("selected") == false) {
+        {
+            if (counter_value == 9) {
+                step_2.style.display = "block"
+                selected_sticker.classList.add('selected')
+                counter_value = counter_value+=1
+                counter.innerText = counter_value
+                selected_stickers_array.push(sticker_image)
+                return 1
+            }
+            if (counter_value == 10) {
+                error_if_more_than_ten.innerText = "You can't choose more than 10!"
+                return 0
+            }
+            else
+            {
+                step_2.style.display = "none"
+                error_if_more_than_ten.innerText = ""
+                selected_sticker.classList.add('selected')
+                counter_value = counter_value+=1
+                counter.innerText = counter_value
+                selected_stickers_array.push(sticker_image)
+                return 0
+            }
+        }}
+    }
+
+    step_2 = document.getElementById("step_2")
+    function test() {
+        fetch("http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
+        .then((response) => window.location.href = "http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
+    }
+</script>
+</html>
