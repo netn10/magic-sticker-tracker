@@ -26,3 +26,9 @@ display: table;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+textarea {
+    opacity: 0.3;
+    color: white;
+    background-color: darkblue;
+}

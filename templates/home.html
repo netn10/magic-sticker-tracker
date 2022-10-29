@@ -8,9 +8,11 @@
 </head>
 <body>
     <center>
+        <button onclick="window.location.href='/about'">About</button>
+        <button onclick="window.location.href='/help'">So How Stickers Work Anyway?</button>
         <h1>Welcome to the Sticker Tracker!</h1>
         <h2>To start, please select 10 sticker sheets.</h2>
-        <p>Selected: <span id="counter">0</span> out of 10 <span id="error_if_more_than_ten"></span>    <a onclick="test()" id="step_2" style="display: none" href="#">Step 2</a></p>    
+        <p>Selected: <span id="counter">0</span> out of 10 <span id="error_if_more_than_ten"></span>    <a onclick="go_to_step_2()" id="step_2" style="display: none" href="#">Step 2</a></p>    
     </center>
     {% for sticker_image in all_stickers_images %}
     <img id="{{sticker_image}}" class="homepage_image" src="../static/all_stickers_images/{{sticker_image}}", onclick="select_sticker('{{sticker_image}}')">
@@ -63,12 +65,12 @@
     }
 
     step_2 = document.getElementById("step_2")
-    function test() {
-        fetch("https://magic-sticker-tracker.herokuapp.com/step_2/selected_stickers_array=" +  selected_stickers_array)
-        .then((response) => window.location.href = "https://magic-sticker-tracker.herokuapp.com/step_2/selected_stickers_array=" +  selected_stickers_array)
+    function go_to_step_2() {
+        //fetch("https://magic-sticker-tracker.herokuapp.com/step_2/selected_stickers_array=" +  selected_stickers_array)
+        //.then((response) => window.location.href = "https://magic-sticker-tracker.herokuapp.com/step_2/selected_stickers_array=" +  selected_stickers_array)
         // Uncomment the following while testing offline
-        //fetch("http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
-        //.then((response) => window.location.href = "http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
+        fetch("http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
+        .then((response) => window.location.href = "http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
     }
 </script>
 </html>

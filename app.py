@@ -12,6 +12,14 @@ CORS(app)
 def home():
     return render_template('home.html', all_stickers_images=all_stickers_images)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
 @app.route('/step_2/<selected_stickers_array>', methods=['GET'])
 def step_2(selected_stickers_array):
     selected_stickers_array = selected_stickers_array.replace("selected_stickers_array=", "")

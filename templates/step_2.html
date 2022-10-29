@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script type="text/javascript" src="../static/libs/jquery.js"></script>
-    <script type="text/javascript" src="../static/libs/jquery.maphilight.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Sticker Tracker</title>
     <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='style/all_pages.css') }}" />
     <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='style/step_2.css') }}" />
+    <script type="text/javascript" src="../static/libs/jquery.js"></script>
+    <script type="text/javascript" src="../static/libs/jquery.maphilight.js"></script>
 </head>
 <body>
     <center>
+        <button onclick="window.location.href='/'">Go Back</button>
         <h1>Step Two</h1>
         <h2>Your three randomly selected sticker sheets are:</h2>
     </center>
@@ -30,8 +31,6 @@
             <p id="number_of_tickets_label">0</p>
         </div>
         <button id="minus_ticket">-</button>
-        <br>
-        <button onclick="window.location.href='/'">Go Back</button>
     </center>
 </body>
 <script>
@@ -89,7 +88,7 @@
                        position:'absolute',
                        left: e.pageX,
                        top: e.pageY
-                    }).append('<textarea type="text" rows="2" cols="10" />Sticked on: ').focus().append('<button class=delete_closest_textbox>X</button>'));
+                    }).append('<textarea type="text" rows="2" cols="10" />Stuck to: ').focus().append('<button class=delete_closest_textbox>X</button>'));
             }
         }
 
