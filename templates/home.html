@@ -66,11 +66,11 @@
 
     step_2 = document.getElementById("step_2")
     function go_to_step_2() {
-        //fetch("https://magic-sticker-tracker.herokuapp.com/step_2/selected_stickers_array=" +  selected_stickers_array)
-        //.then((response) => window.location.href = "https://magic-sticker-tracker.herokuapp.com/step_2/selected_stickers_array=" +  selected_stickers_array)
+        fetch("https://magic-sticker-tracker.herokuapp.com/step_2/selected_stickers_array=" +  selected_stickers_array)
+        .then((response) => window.location.href = "https://magic-sticker-tracker.herokuapp.com/step_2/selected_stickers_array=" +  selected_stickers_array)
         // Uncomment the following while testing offline
-        fetch("http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
-        .then((response) => window.location.href = "http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
+        //fetch("http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
+        //.then((response) => window.location.href = "http://localhost:5000/step_2/selected_stickers_array=" +  selected_stickers_array)
     }
 </script>
 </html>

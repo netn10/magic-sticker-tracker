@@ -27,7 +27,6 @@ def step_2(selected_stickers_array):
     # Randomly choose 3
     selected_stickers_array = sample(selected_stickers_array, 3)
     # Read data of sticker
-
     sticker_images_and_data = {}
     for sticker in selected_stickers_array:
         sticker = sticker.replace("jpg", "json")
