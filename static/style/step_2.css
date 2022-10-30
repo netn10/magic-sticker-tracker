@@ -1,8 +1,9 @@
 /* Three image containers (use 25% for four, and 50% for two, etc) */
+@media (min-width: 1024px) {
 .column {
     float: left;
     width: 33.33%;
-    }
+    }}
     
 /* Clear floats after image containers */
 .row::after {

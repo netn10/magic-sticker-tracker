@@ -14,18 +14,14 @@
         <h1>Step Two</h1>
         <h2>Your three randomly selected sticker sheets are:</h2>
     </center>
-
-    <table width="99%">
-        <tr>
+    <div class="row">
     {% for sticker_image, sticker_data in sticker_images_and_data.items() %}
-    <td>
+    <div class="column">
     <img usemap="#{{sticker_image}}" id="{{sticker_image}}" class="step_2_image" src="../static/all_stickers_images/{{sticker_image}}">
-    </td>
     {{sticker_data|safe}}
     </div>
     {% endfor %}
-    </tr>
-    </table>
+    </div>
 
     <br>
     <center>
